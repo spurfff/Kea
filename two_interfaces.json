@@ -1,0 +1,74 @@
+{
+        "Dhcp4" : {
+                "interfaces-config" : {
+                        "interfaces" : [ "ens18", "ens19" ],
+                        "dhcp-socket-type" : "udp"
+                },
+                "control-socket" : {
+                        "socket-type" : "unix",
+                        "socket-name" : "/run/kea/kea4-ctrl-socket"
+                },
+                "lease-database" : {
+                        "type" : "memfile",
+                        "persist" : true,
+                        "name" : "/var/lib/kea/dhcp4.leases",
+                        "lfc-interval" : 3600
+                },
+                "valid-lifetime" : 28800,
+                "max-valid-lifetime" : 30600,
+                "subnet4" : [
+                {
+                        "id" : 1,
+                        "interface": "ens18",
+                        "subnet" : "10.0.0.0/24",
+                        "pools" : [
+                                {
+                                        "pool" : "10.0.0.100 - 10.0.0.150"
+                                }
+                        ],
+                        "option-data": [
+                                {
+                                        "name" : "routers",
+                                        "data" : "10.0.0.1"
+                                },
+                                {
+                                        "name" : "domain-name-servers",
+                                        "data" : "10.0.0.2"
+                                },
+                                {
+                                        "name" : "ntp-servers",
+                                        "data" : "10.0.0.2"
+                                },
+                                {
+                                        "name" : "domain-name",
+                                        "data" : "wired.net"
+                                }
+                        ]
+                },
+                {
+                        "id" : 2,
+                        "interface" : "ens19",
+                        "subnet" : "172.16.1.0/24",
+                        "pools" : [
+                                {
+                                        "pool" : "172.16.1.4 - 172.16.1.10"
+                                }
+                        ],
+                        "option-data" : [
+                                {
+                                        "name" : "domain-name-servers",
+                                        "data" : "172.16.1.2"
+                                },
+                                {
+                                        "name" : "domain-name",
+                                        "data" : "wired.net"
+                                },
+                                {
+                                        "name" : "ntp-servers",
+                                        "data" : "172.16.1.2"
+                                }
+                        ]
+                }
+                ]
+        }
+}
